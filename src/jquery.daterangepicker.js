@@ -1032,14 +1032,14 @@
 				}
 			});
 
-			box.find('.time1 input[type=range]').bind('change touchmove mousemove', function (e) {
+			box.find('.time1 input[type=number]').bind('change', function (e) {
 				var target = e.target,
 					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
 					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
 				setTime('time1', hour, min);
 			});
 
-			box.find('.time2 input[type=range]').bind('change touchmove mousemove', function (e) {
+			box.find('.time2 input[type=number]').bind('change', function (e) {
 				var target = e.target,
 					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
 					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
@@ -1163,8 +1163,8 @@
 		}
 
 		function renderTime (name, date) {
-			box.find('.' + name + ' input[type=range].hour-range').val(moment(date).hours());
-			box.find('.' + name + ' input[type=range].minute-range').val(moment(date).minutes());
+			box.find('.' + name + ' input[type=number].hour-input').val(moment(date).hours());
+			box.find('.' + name + ' input[type=number].minute-input').val(moment(date).minutes());
 			setTime(name, moment(date).format('HH'), moment(date).format('mm'));
 		}
 
@@ -1184,8 +1184,6 @@
 
 		function setTime (name, hour, minute)
 		{
-			hour && (box.find('.' + name + ' .hour-val').text(hour));
-			minute && (box.find('.' + name + ' .minute-val').text(minute));
 			switch (name) {
 				case 'time1':
 					if (opt.start) {
@@ -1918,15 +1916,9 @@
 
 		function getTimeHTML()
 		{
-			return '<div>' +
-					'<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
-				'</div>' +
-				'<div class="hour">' +
-					'<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
-				'</div>' +
-				'<div class="minute">' +
-					'<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
-				'</div>';
+			return '<div class="time-selection">' +
+						'<label>'+lang('Time')+':</label> <input type="number" class="hour-input" name="hour" min="0" max="23">:<input type="number" class="minute-input" name="minute" min="0" max="59">' +
+					'</div>';
 		}
 
 		function createDom()
