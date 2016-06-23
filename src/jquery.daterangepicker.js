@@ -2,6 +2,9 @@
 // author : Chunlong Liu
 // license : MIT
 // www.jszen.com
+//
+// !!! Modified for Flockler by tophattom !!!
+//
 
 (function (factory) {
 		if (typeof define === 'function' && define.amd) {
